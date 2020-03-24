@@ -5,11 +5,10 @@ import (
 )
 
 // HashPassword returns hashed version of password
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 12)
+func HashPassword(password string, cost int) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), cost)
 	return string(bytes), err
 }
-
 
 // CheckPasswordHash compares hashes between password string
 func CheckPasswordHash(password, hash string) bool {
