@@ -1,4 +1,4 @@
-module github.com/ac5tin/useful
+module github.com/ac5tin/usefulgo
 
 go 1.14
 
