@@ -40,7 +40,7 @@ err := uf.CSVParser(r,func(res []string,chunk int){
 
 ### CSVParserH
 ```Go
-// CSVParserH parses csv and runs callback function
+// // CSVParserH parses csv with headers and runs callback function
 reader := bytes.NewReader(byteslice)
 r := csv.NewReader(reader)
 err := uf.CSVParserH(r,func(res []map[string]string,chunk int){
