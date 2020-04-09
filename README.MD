@@ -59,7 +59,18 @@ hashed,err := uf.HashPassword(pw,cost)
 // CheckPasswordHash compares hashes between password string
 cmp := uf.CheckPasswordHash(pw,hashed)
 ```
+### Mapfields
+```Go
+// Mapfields - returns subset map
 
+mf := uf.Mapfields(d, fields) //d is of type map[string]interface{}
+```
+
+### Hashmap
+```Go
+// Hashmap hashes a map using sha256 and returns the hash as string
+mfhash, err := uf.Hashmap(mf)
+```
 
 # Random
 ### RandString
