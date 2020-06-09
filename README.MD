@@ -94,3 +94,11 @@ newstr := uf.RmDash(oldstr)
 ```Go
 uuid := uf.GenUUIDV4()
 ```
+
+
+# Math
+### IntAbs
+```Go
+x := -5
+absx := uf.IntAbs(x) // returns 5
+```
