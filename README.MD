@@ -20,6 +20,17 @@ containstring := uf.ArrContains(arrstring,str)
 uf.ArrRMS(&arr,str)
 ```
 
+
+#### ArrRMiF and ArrRmiS (remove array elemet by index (fast and slow))
+- ArrRmiF (Fast array index remover but doesnt maintain order)
+- ArrRmiS (Slow array index remover but maintains order)
+
+```Go
+NewArrRmiF().String(&stringarr,3)
+NewArrRmiS().Int(&intarr,3)
+```
+
+
 # Binary
 ### GetBytes
 ```Go
