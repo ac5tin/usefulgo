@@ -37,3 +37,22 @@ func (fs FS) Read(path string) ([]byte, error) {
 	}
 	return data, nil
 }
+
+// FileExist returns bool value of whether file exists
+func (fs FS) FileExist(path string) bool {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true
+	}
+	return false
+}
+
+// CreateFile creates empty file
+func (fs FS) CreateFile(path string) error {
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	return nil
+}
