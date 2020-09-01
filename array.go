@@ -58,6 +58,13 @@ func (a ArrRmiF) Int(slice *[]int, index uint32) {
 	(*slice) = (*slice)[:len(*slice)-1]
 }
 
+// Any - []interface{} remover
+func (a ArrRmiF) Any(slice *[]interface{}, index uint32) {
+	(*slice)[index] = (*slice)[len(*slice)-1]
+	(*slice)[len(*slice)-1] = 0
+	(*slice) = (*slice)[:len(*slice)-1]
+}
+
 // Object - []map[string]interface{} remover
 func (a ArrRmiS) Object(slice *[]map[string]interface{}, index uint32) {
 	copy((*slice)[index:], (*slice)[index+1:])
@@ -74,6 +81,13 @@ func (a ArrRmiS) String(slice *[]string, index uint32) {
 
 // Int - []int remover
 func (a ArrRmiS) Int(slice *[]int, index uint32) {
+	copy((*slice)[index:], (*slice)[index+1:])
+	(*slice)[len(*slice)-1] = 0
+	(*slice) = (*slice)[:len(*slice)-1]
+}
+
+// Any - []interface{} remover
+func (a ArrRmiS) Any(slice *[]interface{}, index uint32) {
 	copy((*slice)[index:], (*slice)[index+1:])
 	(*slice)[len(*slice)-1] = 0
 	(*slice) = (*slice)[:len(*slice)-1]
