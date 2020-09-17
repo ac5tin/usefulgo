@@ -25,13 +25,21 @@ func (m Misc) NewURLBuilder(opts ...string) URLBuilder {
 		PortString: "",
 	}
 	if len(opts) >= 1 {
-		u.Scheme = opts[0]
+		if opts[0] != "" {
+			u.Scheme = opts[0]
+		}
+
 	}
 	if len(opts) >= 2 {
-		u.URL = opts[1]
+		if opts[1] != "" {
+			u.URL = opts[1]
+		}
 	}
 	if len(opts) >= 3 {
-		u.PortString = fmt.Sprintf(":%s", opts[2])
+		if opts[2] != "" {
+			u.PortString = fmt.Sprintf(":%s", opts[2])
+		}
+
 	}
 	return u
 }
