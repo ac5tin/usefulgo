@@ -113,3 +113,11 @@ uuid := uf.GenUUIDV4()
 x := -5
 absx := uf.IntAbs(x) // returns 5
 ```
+
+
+# Compression
+### Compress, Decompress
+```Go
+NewCmpr().Compress(data,"xz") // gz for gzip, xz for LZMA2 xz
+NewCmpr().Decompress(data,"xz")
+```
