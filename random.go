@@ -5,16 +5,16 @@ import (
 	"time"
 	"unsafe"
 )
+
 const (
-	letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
+	letterBytes   = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
 	letterIdxBits = 6                    // 6 bits to represent a letter index
 	letterIdxMask = 1<<letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
 	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
 )
 
-
 // RandString generates random string
-func RandString(n int) string {
+func RandString[T Integer | UInteger](n T) string {
 	rand.Seed(time.Now().UnixNano())
 	src := rand.NewSource(time.Now().UnixNano())
 	b := make([]byte, n)
