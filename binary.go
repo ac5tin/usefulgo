@@ -6,12 +6,13 @@ import (
 )
 
 // GetBytes returns binary byte slices
-func GetBytes(key interface{}) ([]byte, error) {
+func GetBytes[T any](key T) (*[]byte, error) {
 	var buf bytes.Buffer
 	enc := gob.NewEncoder(&buf)
 	err := enc.Encode(key)
 	if err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil
+	b := buf.Bytes()
+	return &b, nil
 }
