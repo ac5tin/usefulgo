@@ -2,11 +2,11 @@ package utils
 
 // Numbers
 type UInteger interface {
-	uint8 | uint16 | uint32 | uint64
+	uint | uint8 | uint16 | uint32 | uint64
 }
 
 type Integer interface {
-	int8 | int16 | int32 | int64
+	int | int8 | int16 | int32 | int64
 }
 
 type Float interface {
