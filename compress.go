@@ -17,7 +17,7 @@ func NewCmpr() Cmpr {
 }
 
 // Gzip - gzip compress binary
-func (cmp Cmpr) Gzip(data *[]byte) ([]byte, error) {
+func (cmp Cmpr) Gzip(data *[]byte) (*[]byte, error) {
 	var b bytes.Buffer
 	gz, err := gzip.NewWriterLevel(&b, gzip.BestCompression)
 	if err != nil {
@@ -29,11 +29,12 @@ func (cmp Cmpr) Gzip(data *[]byte) ([]byte, error) {
 	if err := gz.Close(); err != nil {
 		return nil, err
 	}
-	return b.Bytes(), nil
+	bt := b.Bytes()
+	return &bt, nil
 }
 
 // UnGzip - gzip decompress
-func (cmp Cmpr) UnGzip(input *[]byte) ([]byte, error) {
+func (cmp Cmpr) UnGzip(input *[]byte) (*[]byte, error) {
 	gr, err := gzip.NewReader(bytes.NewBuffer(*input))
 	if err != nil {
 		return nil, err
@@ -42,11 +43,12 @@ func (cmp Cmpr) UnGzip(input *[]byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	return data, nil
+	b := data
+	return &b, nil
 }
 
 // Xz - xz compress binary
-func (cmp Cmpr) Xz(data *[]byte) ([]byte, error) {
+func (cmp Cmpr) Xz(data *[]byte) (*[]byte, error) {
 	var b bytes.Buffer
 
 	xw, err := xz.NewWriter(&b)
@@ -59,11 +61,13 @@ func (cmp Cmpr) Xz(data *[]byte) ([]byte, error) {
 	if err := xw.Close(); err != nil {
 		return nil, err
 	}
-	return b.Bytes(), nil
+
+	bt := b.Bytes()
+	return &bt, nil
 }
 
 // UnXz - xz decompress
-func (cmp Cmpr) UnXz(input *[]byte) ([]byte, error) {
+func (cmp Cmpr) UnXz(input *[]byte) (*[]byte, error) {
 	xr, err := xz.NewReader(bytes.NewBuffer(*input))
 	if err != nil {
 		return nil, err
@@ -72,11 +76,13 @@ func (cmp Cmpr) UnXz(input *[]byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	return data, nil
+
+	b := data
+	return &b, nil
 }
 
 // Compress - compress data
-func (cmp Cmpr) Compress(data *[]byte, method string) ([]byte, error) {
+func (cmp Cmpr) Compress(data *[]byte, method string) (*[]byte, error) {
 	switch method {
 	case "xz":
 		return cmp.Xz(data)
@@ -86,7 +92,7 @@ func (cmp Cmpr) Compress(data *[]byte, method string) ([]byte, error) {
 }
 
 // Decompress - decompress data
-func (cmp Cmpr) Decompress(input *[]byte, method string) ([]byte, error) {
+func (cmp Cmpr) Decompress(input *[]byte, method string) (*[]byte, error) {
 	switch method {
 	case "xz":
 		return cmp.UnXz(input)
