@@ -14,7 +14,7 @@ func NewFS() FS {
 }
 
 // Write - write to file
-func (fs FS) Write(data []byte, path string) error {
+func (fs FS) Write(data *[]byte, path string) error {
 	err := os.Truncate(path, 0)
 	if err != nil {
 		return err
@@ -25,17 +25,17 @@ func (fs FS) Write(data []byte, path string) error {
 		panic(err.Error())
 	}
 	defer f.Close()
-	f.Write(data)
+	f.Write(*data)
 	return nil
 }
 
 // Read - read file
-func (fs FS) Read(path string) ([]byte, error) {
+func (fs FS) Read(path string) (*[]byte, error) {
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
-	return data, nil
+	return &data, nil
 }
 
 // FileExist returns bool value of whether file exists
