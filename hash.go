@@ -21,16 +21,16 @@ func CheckPasswordHash(password, hash string) bool {
 }
 
 // Mapfields - returns subset map
-func Mapfields(d map[string]interface{}, fields []string) map[string]interface{} {
-	retme := make(map[string]interface{})
-	for _, field := range fields {
-		retme[field] = d[field]
+func Mapfields[T map[string]any](d *T, fields *[]string) *T {
+	retme := make(T)
+	for _, field := range *fields {
+		retme[field] = (*d)[field]
 	}
-	return retme
+	return &retme
 }
 
 // Hashmap hashes a map using sha256 and returns the hash as string
-func Hashmap(d map[string]interface{}) (string, error) {
+func Hashmap[T map[string]any](d *T) (string, error) {
 	b, err := json.Marshal(d)
 	if err != nil {
 		return "", err
