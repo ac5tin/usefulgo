@@ -1,6 +1,6 @@
 module github.com/ac5tin/usefulgo
 
-go 1.14
+go 1.18
 
 require (
 	github.com/google/uuid v1.1.2
