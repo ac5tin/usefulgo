@@ -7,7 +7,7 @@ import (
 )
 
 // CSVParser parses csv and runs callback function
-func CSVParser(r *csv.Reader, cb func(res []string, chunk int), rows int) error {
+func CSVParser(r *csv.Reader, cb func(res *[]string, chunk int), rows int) error {
 	ins := []string{}
 	chunk := 0
 	for {
@@ -24,14 +24,14 @@ func CSVParser(r *csv.Reader, cb func(res []string, chunk int), rows int) error 
 		// if ins length is ROWSIZE, chunk size reached, make this a chunk (++chunk)
 		if len(ins) == rows {
 			// run chunk callback function
-			go cb(ins, chunk)
+			go cb(&ins, chunk)
 			// empty slice
 			ins = ins[:0]
 			chunk++
 		}
 	}
 	if len(ins) > 0 {
-		go cb(ins, chunk)
+		go cb(&ins, chunk)
 	}
 
 	log.Printf("finish parsing csv, total chunks : %d\n", chunk)
@@ -39,7 +39,7 @@ func CSVParser(r *csv.Reader, cb func(res []string, chunk int), rows int) error 
 }
 
 // CSVParserH parses csv with headers and runs callback function
-func CSVParserH(r *csv.Reader, cb func(res []map[string]string, chunk int), rows int) error {
+func CSVParserH(r *csv.Reader, cb func(res *[]map[string]string, chunk int), rows int) error {
 	ins := []map[string]string{}
 	headers := []string{}
 	chunk := 0
@@ -66,7 +66,7 @@ func CSVParserH(r *csv.Reader, cb func(res []map[string]string, chunk int), rows
 		// if ins length is ROWSIZE, chunk size reached, make this a chunk (++chunk)
 		if len(ins) == rows {
 			// run chunk callback function
-			go cb(ins, chunk)
+			go cb(&ins, chunk)
 			// empty slice
 			ins = ins[:0]
 			chunk++
@@ -74,7 +74,7 @@ func CSVParserH(r *csv.Reader, cb func(res []map[string]string, chunk int), rows
 	}
 
 	if len(ins) > 0 {
-		go cb(ins, chunk)
+		go cb(&ins, chunk)
 	}
 
 	return nil
