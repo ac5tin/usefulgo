@@ -26,7 +26,7 @@ func createHash(key string) string {
 }
 
 // Enc - encrypt data
-func (c Crypto) Enc(data *[]byte, passphrase string) ([]byte, error) {
+func (c Crypto) Enc(data *[]byte, passphrase string) (*[]byte, error) {
 	block, _ := aes.NewCipher([]byte(createHash(passphrase)))
 	gcm, err := cipher.NewGCM(block)
 	if err != nil {
@@ -37,7 +37,7 @@ func (c Crypto) Enc(data *[]byte, passphrase string) ([]byte, error) {
 		return nil, err
 	}
 	ciphertext := gcm.Seal(nonce, nonce, *data, nil)
-	return ciphertext, nil
+	return &ciphertext, nil
 }
 
 // Dec - decrypt data
@@ -79,7 +79,7 @@ func (c Crypto) EncryptFile(filename string, data *[]byte, passphrase string) er
 	if err != nil {
 		return err
 	}
-	if _, err := f.Write(b); err != nil {
+	if _, err := f.Write(*b); err != nil {
 		return err
 	}
 	return nil
