@@ -10,6 +10,18 @@ import (
 
 // HashPassword returns hashed version of password
 func HashPassword(password string, cost int) (string, error) {
+	// ensure cost is within allowed range
+	{
+		const MIN_COST = 4
+		const MAX_COST = 31
+		if cost < MIN_COST {
+			cost = MIN_COST
+		}
+		if cost > MAX_COST {
+			cost = MAX_COST
+		}
+	}
+
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), cost)
 	return string(bytes), err
 }
