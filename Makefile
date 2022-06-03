@@ -1,5 +1,5 @@
 test: 
-	go test ./... -v -cover
+	go test -run=Test ./... -v -cover
 
 fuzz:
 	go test -fuzz=Fuzz ./... -v -cover
