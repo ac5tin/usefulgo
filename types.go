@@ -13,6 +13,10 @@ type Float interface {
 	~float32 | ~float64
 }
 
+type WholeNumber interface {
+	UInteger | Integer
+}
+
 type Number interface {
 	UInteger | Integer | Float
 }
