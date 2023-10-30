@@ -3,10 +3,10 @@ module github.com/ac5tin/usefulgo
 go 1.21
 
 require (
-	github.com/google/uuid v1.1.2
+	github.com/google/uuid v1.4.0
 	github.com/stretchr/testify v1.7.1
-	github.com/ulikunitz/xz v0.5.8
-	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897
+	github.com/ulikunitz/xz v0.5.11
+	golang.org/x/crypto v0.14.0
 )
 
 require (
