@@ -121,3 +121,11 @@ absx := uf.IntAbs(x) // returns 5
 NewCmpr().Compress(data,"xz") // gz for gzip, xz for LZMA2 xz
 NewCmpr().Decompress(data,"xz")
 ```
+
+
+# Parsing
+### NumParse, FloatParse
+```go
+NumParse[int64]("123") // parse string to int64
+FloatParse[float32]("1.12") // parse string to float32
+```
